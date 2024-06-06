@@ -1,17 +1,10 @@
-﻿abstract class User
+﻿abstract class User(string login, string password)
 {
     protected int _id;
-    public string? Login { get; private set; }
-    public string? Password { get; private set; }
-    protected Personal PersonalInfo { get; private set; }
+    public string? Login { get; private set; } = login;
+    public string? Password { get; private set; } = password;
+    protected Personal PersonalInfo { get; private set; } = new Personal();
 
-    //modificar
-    public User(string login, string password)
-    {
-        this.Login = login;
-        this.Password = password;
-        PersonalInfo = new Personal();
-    }
     protected class Personal
     {
         public string? Name { get; set; }
