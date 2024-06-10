@@ -2,8 +2,7 @@
 
 public class AppDbContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Admin> Admins { get; set; }
+    public DbSet<Doctor> Doctors { get; set; }
     public DbSet<Customer> Customers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -13,10 +12,16 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>()
-            .HasDiscriminator<string>("UserType")
-            .HasValue<Admin>("Admin")
-            .HasValue<Customer>("Customer");
+        modelBuilder.Entity<User>().ToTable("Users");
+
+        modelBuilder.Entity<Doctor>().ToTable("Doctors");
+        modelBuilder.Entity<Customer>().ToTable("Customers");
+
+        modelBuilder.Entity<Doctor>()
+            .HasBaseType<User>();
+
+        modelBuilder.Entity<Customer>()
+            .HasBaseType<User>();
 
         modelBuilder.Entity<User>()
             .OwnsOne(u => u.PersonalInfo);

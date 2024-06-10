@@ -1,4 +1,4 @@
-class Doctor(string login, string password) : User(login, password)
+public class Doctor(string login, string password) : User(login, password)
 {
     
 }
