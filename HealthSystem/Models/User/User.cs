@@ -8,9 +8,17 @@ public abstract class User(string login, string password, string name, string ad
 
     public class Personal(string name, string address, string email, int telephone)
     {
-        public string? Name { get; set; } = name;
-        public string? Address { get; set; } = address;
-        public string? Email { get; set; } = email;
-        public int? Telephone { get; set; } = telephone;
+        public string? Name { get; private set; } = name;
+        public string? Address { get; private set; } = address;
+        public string? Email { get; private set; } = email;
+        public int? Telephone { get; private set; } = telephone;
+
+        public void UpdateName(string newName) => Name = newName;
+        public void UpdateAddress(string newAddress) => Address = newAddress;
+        public void UpdateEmail(string newEmail) => Email = newEmail;
+        public void UpdateTelephone(int newTelephone) => Telephone = newTelephone;
     }
+
+    public void UpdateLogin(string newlogin) => Login = newlogin;
+    public void UpdatePassword(string newPassword) => Password = newPassword;
 }

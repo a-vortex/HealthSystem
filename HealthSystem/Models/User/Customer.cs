@@ -3,5 +3,7 @@
 public class Customer(string login, string password, string name, string address, string email, int telephone) :
 User(login, password, name, address, email, telephone)
 {
-    public HealthPlan? HealthPlan {get;set;}
+    public HealthPlan? HealthPlan {get;private set;}
+
+    public void SetHealthPlan(HealthPlan healthPlan) => HealthPlan = healthPlan;
 }
