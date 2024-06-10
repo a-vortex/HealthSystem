@@ -1,9 +1,11 @@
-﻿abstract class HealthPlan(string name, float price)
+﻿public class HealthPlan(string name, float price, string description)
 {
-    protected int PlanId { get; private set; }
-    protected string Name { get; private set; } = name;
-    protected float Price { get; private set; } = price;
-    protected List<MedicalServices>? Coverages { get; private set; } = null;
-
-    public abstract string Description();
+    public int PlanId { get; private set; }
+    public string Name { get; private set; } = name;
+    public float Price { get; private set; } = price;
+    public string Description { get; private set; } = description;
+    public List<MedicalServices> Coverages { get; private set; } = new List<MedicalServices>();
+    public void AddCoverages(MedicalServices medicalService){
+        Coverages.Add(medicalService);
+    }
 }
