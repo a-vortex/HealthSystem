@@ -1,9 +1,8 @@
-public abstract class MedicalAppointment
+public class MedicalAppointment(DateTime appointmentDate, int patientId, int doctorId, MedicalServices medicalService)
 {
-        public DateTime AppointmentDate { get; set; }
-        public string? PatientName { get; set; }
-        public string? DoctorName { get; set; }
-
-        public abstract void ScheduleAppointment();
-        public abstract void CancelAppointment();
+	public int AppointmentId { get; }
+    public DateTime AppointmentDate { get; } = appointmentDate;
+    public int PatientId { get; } = patientId;
+    public int DoctorId { get; } = doctorId;
+    public MedicalServices MedicalService { get; } = medicalService;
 }

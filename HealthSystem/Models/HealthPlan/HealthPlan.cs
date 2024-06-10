@@ -4,7 +4,7 @@
     public string Name { get; private set; } = name;
     public float Price { get; private set; } = price;
     public string Description { get; private set; } = description;
-    public List<MedicalServices> Coverages { get; private set; } = new List<MedicalServices>();
+    public List<MedicalServices> Coverages { get; private set; } = [];
     public void AddCoverages(MedicalServices medicalService){
         Coverages.Add(medicalService);
     }
