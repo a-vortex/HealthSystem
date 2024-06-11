@@ -1,9 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace HealthSystem.Models.User;
 
 public class Doctor : User
 {
-    readonly string? CRM;
-    readonly string? Specialty;
+    [Required]
+    public string? CRM { get; set; }
+    [Required]
+    public string? Specialty { get; set; }
 
     public Doctor() : base() { }
     public Doctor(string login, string password, Personal personalInfo, string name, string address, string email, int telephone, string crm, string specialty) : 

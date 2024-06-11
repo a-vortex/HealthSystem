@@ -14,18 +14,29 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>().ToTable("Users");
+        modelBuilder.Entity<User>().ToTable("Users")
+            .HasDiscriminator<string>("UserType")
+            .HasValue<Doctor>("Doctor")
+            .HasValue<Customer>("Customer");
 
         modelBuilder.Entity<Doctor>().ToTable("Doctors");
         modelBuilder.Entity<Customer>().ToTable("Customers");
 
+        modelBuilder.Entity<User>()
+            .OwnsOne(u => u.PersonalInfo, personal =>
+            {
+                personal.Property(p => p.Name).IsRequired();
+                personal.Property(p => p.Address).IsRequired();
+                personal.Property(p => p.Email).IsRequired();
+                personal.Property(p => p.Telephone).IsRequired();
+            });
+
         modelBuilder.Entity<Doctor>()
-            .HasBaseType<User>();
+            .HasBaseType<User>()
+            .HasKey(d => d.Id);
 
         modelBuilder.Entity<Customer>()
-            .HasBaseType<User>();
-
-        modelBuilder.Entity<User>()
-            .OwnsOne(u => u.PersonalInfo);
+            .HasBaseType<User>()
+            .HasKey(c => c.Id);
     }
 }
