@@ -6,6 +6,10 @@ public class AppDbContext : DbContext
 {
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<HealthPlan> HealthPlans { get; set; }
+    public DbSet<MedicalService> MedicalServices { get; set; }
+    public DbSet<MedicalAppointment> MedicalAppointments { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -30,13 +34,5 @@ public class AppDbContext : DbContext
                 personal.Property(p => p.Email).IsRequired();
                 personal.Property(p => p.Telephone).IsRequired();
             });
-
-        modelBuilder.Entity<Doctor>()
-            .HasBaseType<User>()
-            .HasKey(d => d.Id);
-
-        modelBuilder.Entity<Customer>()
-            .HasBaseType<User>()
-            .HasKey(c => c.Id);
     }
 }
