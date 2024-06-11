@@ -5,15 +5,16 @@ namespace HealthSystem.Models.User;
 public class Doctor : User
 {
     [Required]
-    public string? CRM { get; set; }
+    public string? CRMorCOREN { get; set; }
     [Required]
-    public string? Specialty { get; set; }
+    public MedicalServiceArea MedicalServiceArea { get; set; }
 
     public Doctor() : base() { }
-    public Doctor(string login, string password, Personal personalInfo, string name, string address, string email, int telephone, string crm, string specialty) : 
+    public Doctor(string login, string password, Personal personalInfo, string name, string address, string email, int telephone,
+    string crmorcoren, MedicalServiceArea medicalServiceArea) : 
     base(login, password, personalInfo, name, address, email, telephone)
     {
-        CRM = crm;
-        Specialty = specialty;
+        CRMorCOREN = crmorcoren;
+        MedicalServiceArea = medicalServiceArea;
     }
 }
