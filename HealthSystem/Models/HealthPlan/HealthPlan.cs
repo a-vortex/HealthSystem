@@ -4,7 +4,8 @@
     public string? Name { get; private set; } 
     public float? Price { get; private set; }
     public string? Description { get; private set; }
-    public List<MedicalService> Coverages { get; private set; } = [];
+    public List<MedicalServiceType> Coverages { get; private set; } = [];
+
     public HealthPlan() {}
     public HealthPlan(string name, float price, string description)
     {
@@ -12,10 +13,11 @@
         Price = price;
         Description = description;
     }
-    public void AddCoverages(MedicalService medicalService){
+    
+    public void AddCoverages(MedicalServiceType medicalService){
         Coverages.Add(medicalService);
     }
-    public void RemoveCoverages(MedicalService medicalService){
+    public void RemoveCoverages(MedicalServiceType medicalService){
         Coverages.Remove(medicalService);
     }
 }
