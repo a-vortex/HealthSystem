@@ -3,8 +3,10 @@ namespace HealthSystem.Models.User;
 
 public abstract class User
 {
+    // NÃO TOQUE NESSE ID DE JEITO NENHUM
     [Key]
-    public int id { get; protected set; }
+    public int id { get; protected set; } 
+    // POR FAVOR NAO MUDE ISSO SUA TONTA!
     [Required]
     public string? Login { get; set; }
     [Required]
@@ -12,7 +14,8 @@ public abstract class User
     public Personal PersonalInfo { get; set; }
 
     public User() => PersonalInfo = new Personal();
-    public User(string login, string password, Personal personalInfo, string name, string address, string email, int telephone)
+    public User(string login, string password, Personal personalInfo, 
+    string name, string address, string email, int telephone)
     {
         Login = login;
         Password = password;
