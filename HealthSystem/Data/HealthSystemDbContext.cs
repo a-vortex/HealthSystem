@@ -1,5 +1,6 @@
-﻿using HealthSystem.Models.User;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using HealthSystem.Models.User;
+
 
 namespace HealthSystem.Data;
 public class AppDbContext : DbContext
@@ -34,5 +35,26 @@ public class AppDbContext : DbContext
                 personal.Property(p => p.Email).IsRequired();
                 personal.Property(p => p.Telephone).IsRequired();
             });
+
+        modelBuilder.Entity<HealthPlan>().HasKey(hp => hp.PlanId);
+        modelBuilder.Entity<MedicalAppointment>().HasKey(ma => ma.AppointmentId);
+        modelBuilder.Entity<MedicalService>().HasKey(ms => ms.MedicalServiceId);
+
+        modelBuilder.Entity<Customer>()
+            .HasOne(c => c.HealthPlan)
+            .WithMany()
+            .HasForeignKey(c => c.HealthPlanId);
+
+        modelBuilder.Entity<MedicalAppointment>()
+            .HasOne(ma => ma.Doctor)
+            .WithMany()
+            .HasForeignKey(ma => ma.DoctorId)
+            .HasPrincipalKey(d => d.id);
+
+        modelBuilder.Entity<MedicalAppointment>()
+            .HasOne(ma => ma.Customer)
+            .WithMany()
+            .HasForeignKey(ma => ma.PatientId)
+            .HasPrincipalKey(c => c.id);
     }
 }
