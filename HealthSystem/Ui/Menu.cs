@@ -1,8 +1,10 @@
-abstract class IMenu
+public abstract class IMenu
 {
     protected string _title = "Title";
+    protected string inputstr = "> Option: ";
     protected List<string> _options = new List<string>();
 
+    public abstract IMenu? MenuNext(int option);
     public void Render(){
         Console.Clear();
         string border = new('=', _title.Length + 30);
@@ -18,6 +20,7 @@ abstract class IMenu
         }
 
         Console.WriteLine(border);
-        Console.Write("> Opção: ");
+        Console.Write(inputstr);
     }
+
 }
