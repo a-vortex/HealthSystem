@@ -1,6 +1,6 @@
 ﻿public class HealthPlan
 {
-    public int PlanId { get; private set; }
+    public int PlanId { get; private set; } //Primary Key
     public string? Name { get; private set; } 
     public float? Price { get; private set; }
     public string? Description { get; private set; }
