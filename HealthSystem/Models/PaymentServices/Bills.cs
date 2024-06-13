@@ -1,8 +1,9 @@
 using HealthSystem.Models.User;
+using System;
 
 public class Bill
 {
-    public int Id { get; private set; }
+    public int BillId { get; private set; }
     public DateTime Date { get; private set; }
     public DateTime DueDate { get; private set; }
     public decimal Value { get; private set; }
