@@ -3,8 +3,9 @@ using HealthSystem.Models.User;
 
 
 namespace HealthSystem.Data;
-public class AppDbContext : DbContext
+public class HealthSystemDbContext : DbContext
 {
+    public DbSet<User> Users { get; set; }
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<HealthPlan> HealthPlans { get; set; }
@@ -56,5 +57,11 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(ma => ma.PatientId)
             .HasPrincipalKey(c => c.id);
+
+        modelBuilder.Entity<MedicalAppointment>()
+            .HasOne(ma => ma.MedicalService)
+            .WithMany()
+            .HasForeignKey(ma => ma.MedicalServiceId)
+            .HasPrincipalKey(c => c.MedicalServiceId);
     }
 }
