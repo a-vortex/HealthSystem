@@ -1,22 +1,30 @@
-﻿using HealthSystem.Tools;
+﻿using Microsoft.Extensions.DependencyInjection;
+using HealthSystem.Data;
+using HealthSystem.Tools;
 
-InicialPage inicialPage = new();
-string? option;
-inicialPage.Render();
-//FAZER TRATAMENTO DE ENTRADA
-option = Console.ReadLine() ?? "5";
-int? optionInt = IntValidator.Validate(option);
-IMenu? amenu = inicialPage.MenuNext(optionInt ?? 5);
+var serviceProvider = new ServiceCollection()
+            .AddSingleton<HealthSystemDbContext>()
+            .AddSingleton<IUserRepository, UserRepository>()
+            .AddSingleton<IUserService, UserService>()
+            .AddSingleton<IUserController, UserController>()
+            .AddSingleton<IMenuFactory, MenuFactory>()
+            .BuildServiceProvider();
 
-while(amenu != null)
+var userController = serviceProvider.GetService<IUserController>();
+var menuFactory = serviceProvider.GetService<IMenuFactory>();
+
+InicialPage inicialPage = new(menuFactory);
+int? optionInt;
+string option = "";
+IMenu? amenu = inicialPage;
+do
 {
     amenu.Render();
-    option = Console.ReadLine() ?? "5";
+    option = Console.ReadLine() ?? "0";
     //FAZER TRATAMENTO DE ENTRADA
     optionInt = IntValidator.Validate(option);
-    amenu = amenu.MenuNext(optionInt ?? 5);
-} // Esse loop é o que faz o menu funcionar, favor nao remover
-
+    amenu = amenu.MenuNext(optionInt ?? 0);
+} while(amenu != null);
 
 InicialPage.Exit();
 Console.ReadKey();
