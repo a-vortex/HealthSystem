@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using HealthSystem.Models.User;
+using HealthSystem.Models.Users;
 
 
 namespace HealthSystem.Data;
@@ -35,6 +35,7 @@ public class HealthSystemDbContext : DbContext
                 personal.Property(p => p.Address).IsRequired();
                 personal.Property(p => p.Email).IsRequired();
                 personal.Property(p => p.Telephone).IsRequired();
+                personal.Property(p => p.Cpf).IsRequired();
             });
 
         modelBuilder.Entity<HealthPlan>().HasKey(hp => hp.PlanId);
