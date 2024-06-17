@@ -1,14 +1,14 @@
-﻿namespace HealthSystem.Models.User;
+﻿namespace HealthSystem.Models.Users;
 
 public class Customer : User
 {
-    public HealthPlan HealthPlan {get;private set;} = new HealthPlan();
+    public HealthPlan? HealthPlan { get; private set; } = null;
     public int HealthPlanId { get; private set; } //Foreign Key
 
-    public Customer() : base() => HealthPlanId = HealthPlan.PlanId;
-    public Customer(string login, string password, Personal personalInfo, string name, string address, string email, int telephone) :
-    base(login, password, personalInfo, name, address, email, telephone) => HealthPlanId = HealthPlan.PlanId;
-    public void SetHealthPlan(HealthPlan healthPlan) 
+    public Customer() : base(){}
+    public Customer(string login, string password, string name, string address, string email, int telephone, int cpf) :
+    base(login, password, name, address, email, telephone, cpf){}
+    public void SetHealthPlan(HealthPlan healthPlan)
     {
         HealthPlan = healthPlan;
         HealthPlanId = healthPlan.PlanId;

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace HealthSystem.Models.User;
+﻿namespace HealthSystem.Models.Users;
+using System.ComponentModel.DataAnnotations;
 
 public abstract class User
 {
@@ -14,8 +14,8 @@ public abstract class User
     public Personal PersonalInfo { get; set; }
 
     public User() => PersonalInfo = new Personal();
-    public User(string login, string password, Personal personalInfo, 
-    string name, string address, string email, int telephone)
+    public User(string login, string password,
+    string name, string address, string email, int telephone, int cpf)
     {
         Login = login;
         Password = password;
@@ -24,7 +24,8 @@ public abstract class User
             Name = name,
             Address = address,
             Email = email,
-            Telephone = telephone
+            Telephone = telephone,
+            Cpf = cpf
         };
     }
 
@@ -40,6 +41,8 @@ public abstract class User
         public string? Email { get; set; }
         [Required]
         public int? Telephone { get; set; }
+        [Required]
+        public int? Cpf { get; set; }
 
         public void UpdateName(string newName) => Name = newName;
         public void UpdateAddress(string newAddress) => Address = newAddress;
