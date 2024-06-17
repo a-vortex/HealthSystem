@@ -9,6 +9,7 @@ public class HealthPlan
     public List<MedicalServiceType> Coverages { get; private set; } = new List<MedicalServiceType>();
 
     public HealthPlan() {}
+    
     public HealthPlan(string name, float price, string description)
     {
         Name = name;

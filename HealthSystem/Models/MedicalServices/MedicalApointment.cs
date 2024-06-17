@@ -1,5 +1,5 @@
 using System;
-using HealthSystem.Models.User;
+using HealthSystem.Models.Users;
 
 public class MedicalAppointment
 {
@@ -7,10 +7,11 @@ public class MedicalAppointment
     public DateTime AppointmentDate { get; set; }
     public int PatientId { get; set; } //Foreign Key
     public int DoctorId { get; set; } //Foreign Key
-    public MedicalService MedicalService { get; set; } = new MedicalService();
+    public int MedicalServiceId { get; set; } //Foreign Key
 
-    public virtual Customer? Customer { get; set; }  // Navegation Property
-    public virtual Doctor? Doctor { get; set; }  // Navegation Property
+    public MedicalService? MedicalService { get; set; } // Navegation Property
+    public Customer? Customer { get; set; }  // Navegation Property
+    public Doctor? Doctor { get; set; }  // Navegation Property
     // These navegation properties are used to create the relationship between the entities
     // and are used by Entity Framework to create the database schema
 
@@ -21,6 +22,7 @@ public class MedicalAppointment
         MedicalService = medicalService;
         Customer = patient;
         Doctor = doctor;
+        MedicalServiceId = medicalService.MedicalServiceId;
         PatientId = patient.id;
         DoctorId = doctor.id;
     }
