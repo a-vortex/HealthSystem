@@ -1,23 +1,34 @@
 public class Login : IMenu
 {
-    public Login()
+    private readonly IUserController _userController;
+    private readonly IMenuFactory _menuFactory;
+    public Login(IUserController userController, IMenuFactory menuFactory, string optionadd = "Input")
     {
-        _title = "Login";
-        inputstr = "> Input: ";
-        _options.Add("=> Type your user");
+        _title = "Login or Sign Up";
+        _userController = userController;
+        _menuFactory = menuFactory;
+        _options.Add("[1] Login");
+        _options.Add("[2] Sign Up");
+        _options.Add("[3] Return to the main menu");
     }
     public override IMenu MenuNext(int option)
     {
-        InicialPage inicialPage = new();
         switch(option)
         {
             case 1:
-                return inicialPage;
-            case 2:
-                return inicialPage;
-            default:
-                return inicialPage;
-        }
+                var isLogged = _userController.Login();
+                if (isLogged)
+                {
+                    return _menuFactory.CreateMenu("CustomerInicialPage");
+                }
+                return _menuFactory.CreateMenu("InicialPage", "Login failed, please try again");
 
+            case 2:
+            case 3:
+                return _menuFactory.CreateMenu("InicialPage");
+
+            default:
+                return _menuFactory.CreateMenu("Login", "Invalid Option, please type an option");
+        }
     }
 }
