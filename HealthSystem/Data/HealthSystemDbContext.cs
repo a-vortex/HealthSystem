@@ -15,15 +15,12 @@ public class HealthSystemDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(@"Server=LAPTOP-6GD96SPC\SQLEXPRESS;Database=HealthSystem;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer(@"Server=LAPTOP-6GD96SPC\SQLEXPRESS;Database=HealthSystem;Trusted_Connection=True;TrustServerCertificate=True");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>().ToTable("Users")
-            .HasDiscriminator<string>("UserType")
-            .HasValue<Doctor>("Doctor")
-            .HasValue<Customer>("Customer");
+        modelBuilder.Entity<User>().ToTable("Users");
 
         modelBuilder.Entity<Doctor>().ToTable("Doctors");
         modelBuilder.Entity<Customer>().ToTable("Customers");

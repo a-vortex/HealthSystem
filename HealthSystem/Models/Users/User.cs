@@ -15,7 +15,7 @@ public abstract class User
 
     public User() => PersonalInfo = new Personal();
     public User(string login, string password,
-    string name, string address, string email, int telephone, int cpf)
+    string name, string address, string email, string telephone, string cpf)
     {
         Login = login;
         Password = password;
@@ -40,13 +40,13 @@ public abstract class User
         [Required]
         public string? Email { get; set; }
         [Required]
-        public int? Telephone { get; set; }
+        public string? Telephone { get; set; }
         [Required]
-        public int? Cpf { get; set; }
+        public string? Cpf { get; set; }
 
         public void UpdateName(string newName) => Name = newName;
         public void UpdateAddress(string newAddress) => Address = newAddress;
         public void UpdateEmail(string newEmail) => Email = newEmail;
-        public void UpdateTelephone(int newTelephone) => Telephone = newTelephone;
+        public void UpdateTelephone(string newTelephone) => Telephone = newTelephone;
     }
 }

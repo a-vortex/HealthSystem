@@ -1,5 +1,6 @@
 public enum MedicalServiceArea
 {
+    NURSE,
     Acupuncture,
     Allergy,
     Anesthesiology,

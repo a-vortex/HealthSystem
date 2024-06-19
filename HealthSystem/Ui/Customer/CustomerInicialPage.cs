@@ -1,11 +1,17 @@
 public class CustomerInicialPage : IMenu
 {
-    public CustomerInicialPage()
+    private readonly IMenuFactory _menuFactory;
+    private readonly IUserSessionService _userSessionService;
+    public CustomerInicialPage(IMenuFactory menuFactory,IUserSessionService userSessionService, string message = "Option")
     {
         _title = "Customer Page";
-        _options.Add("1. Register");
-        _options.Add("2. Login");
-        _options.Add("3. Exit");
+        _options.Add("[1] View Profile");
+        _options.Add("[2] Medical Services");
+        _options.Add("[3] Invoices");
+        _options.Add("[4] Log Out");
+        inputstr = message;
+        _menuFactory = menuFactory;
+        _userSessionService = userSessionService;
     }
 
     public override IMenu? MenuNext(int option)
@@ -13,13 +19,16 @@ public class CustomerInicialPage : IMenu
         switch (option)
         {
             case 1:
-                return this;
+                return _menuFactory.CreateMenu("UserProfile", "Option");
             case 2:
-                return this;
+                return _menuFactory.CreateMenu("CustomerMedicalServices", "Option");
             case 3:
-                return null;
+                return _menuFactory.CreateMenu("CustomerInvoices", "Option");
+            case 4:
+                _userSessionService.ClearCurrentUser();
+                return _menuFactory.CreateMenu("Login", "Logged Out");
             default:
-                return this;
+                return _menuFactory.CreateMenu("CustomerInicialPage", "Invalid Option, please type an option");
         }
     }
 }

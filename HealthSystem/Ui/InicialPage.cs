@@ -28,7 +28,7 @@ public class InicialPage : IMenu
     private IMenu? DisplayAbout()
     {
         RenderAboutPage();
-        return _menuFactory.CreateMenu("InicialPage");
+        return _menuFactory.CreateMenu("InicialPage", "Option");
     }
     public static void Exit()
     {
