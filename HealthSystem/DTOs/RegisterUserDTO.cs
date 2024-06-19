@@ -1,3 +1,5 @@
+#pragma warning disable CS8618 
+
 public class RegisterUserDto
 {
     public string? Login { get; set; }
