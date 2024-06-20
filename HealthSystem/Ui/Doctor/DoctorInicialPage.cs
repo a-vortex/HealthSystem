@@ -2,9 +2,9 @@ public class DoctorInicialPage : IMenu
 {
     private readonly IMenuFactory _menuFactory;
     private readonly IUserSessionService _userSessionService;
-    
+
     private readonly IAppointmentController _appointmentController;
-    public DoctorInicialPage(IMenuFactory menuFactory,IUserSessionService userSessionService,IAppointmentController appointmentController, string optionadd = "Input")
+    public DoctorInicialPage(IMenuFactory menuFactory, IUserSessionService userSessionService, IAppointmentController appointmentController, string optionadd = "Input")
     {
         _title = "Doctor Page";
         _menuFactory = menuFactory;
@@ -17,7 +17,7 @@ public class DoctorInicialPage : IMenu
     }
     public override IMenu MenuNext(int option)
     {
-        switch(option)
+        switch (option)
         {
             case 1:
                 return _menuFactory.CreateMenu("UserProfile", "Option");

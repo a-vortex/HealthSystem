@@ -2,7 +2,7 @@ public class CustomerInicialPage : IMenu
 {
     private readonly IMenuFactory _menuFactory;
     private readonly IUserSessionService _userSessionService;
-    public CustomerInicialPage(IMenuFactory menuFactory,IUserSessionService userSessionService, string message = "Option")
+    public CustomerInicialPage(IMenuFactory menuFactory, IUserSessionService userSessionService, string message = "Option")
     {
         _title = "Customer Page";
         _options.Add("[1] View Profile");

@@ -12,7 +12,7 @@ public class UserRepository : IUserRepository
     }
 
     [return: NotNull]
-    #pragma warning disable CS8603 
+#pragma warning disable CS8603
     public User GetByLogin(string login)
     {
         return _context.Users.SingleOrDefault(u => u.Login == login);
@@ -25,7 +25,7 @@ public class UserRepository : IUserRepository
     {
         return _context.Doctors.SingleOrDefault(u => u.CRMorCOREN == coren);
     }
-    #pragma warning restore CS8603
+#pragma warning restore CS8603
 
     public void Add(User user)
     {

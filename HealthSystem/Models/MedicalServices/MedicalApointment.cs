@@ -13,7 +13,7 @@ public class MedicalAppointment
 
     public MedicalAppointment() => medicalService = new MedicalService();
 
-    public MedicalAppointment(DateTime appointmentDate, Customer patient, Doctor doctor, 
+    public MedicalAppointment(DateTime appointmentDate, Customer patient, Doctor doctor,
     string name, float price, string description, MedicalServiceType medicalServiceType, MedicalServiceArea medicalServiceArea)
     {
         AppointmentDate = appointmentDate;

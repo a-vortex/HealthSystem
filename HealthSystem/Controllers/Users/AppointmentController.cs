@@ -8,13 +8,13 @@ public class AppointmentController : IAppointmentController
     private readonly IUserService _userService;
     private readonly IUserSessionService _userSessionService;
     private readonly IUserRepository _userRepository;
-    public AppointmentController(IAppointmentService appointmentService, IUserService userService, IUserSessionService userSessionService, IAppointmentRepository appointmentRepository,IUserRepository userRepository)
+    public AppointmentController(IAppointmentService appointmentService, IUserService userService, IUserSessionService userSessionService, IAppointmentRepository appointmentRepository, IUserRepository userRepository)
     {
         _appointmentService = appointmentService;
         _userRepository = userRepository;
         _userService = userService;
         _userSessionService = userSessionService;
-        _appointmentRepository = appointmentRepository;    
+        _appointmentRepository = appointmentRepository;
     }
     public void ViewAppointmentsDoctor()
     {
@@ -113,7 +113,7 @@ public class AppointmentController : IAppointmentController
             return false;
         }
         var doctorchoosed = SelecDoctor(availableDoctors);
-        
+
         var appointmentDto = new AppointmentDto
         {
             DoctorId = doctorchoosed.id,
@@ -185,11 +185,12 @@ public class AppointmentController : IAppointmentController
             Console.WriteLine(border);
         }
     }
-    private Doctor SelecDoctor(List<Doctor> availableDoctors){
+    private Doctor SelecDoctor(List<Doctor> availableDoctors)
+    {
         ShowAvailableDoctorsToCustomer(availableDoctors);
         string input = Console.ReadLine();
         int selectedIndex;
-        while (!int.TryParse(input, out selectedIndex) || selectedIndex-1 < 0 || selectedIndex-1 >= availableDoctors.Count)
+        while (!int.TryParse(input, out selectedIndex) || selectedIndex - 1 < 0 || selectedIndex - 1 >= availableDoctors.Count)
         {
             ShowAvailableDoctorsToCustomer(availableDoctors, "Please type a valid option");
             input = Console.ReadLine();
@@ -206,7 +207,7 @@ public class AppointmentController : IAppointmentController
         Console.WriteLine();
         for (int i = 0; i < availableDoctors.Count; i++)
         {
-            Console.WriteLine($"[{i+1}] {availableDoctors[i].PersonalInfo.Name}");
+            Console.WriteLine($"[{i + 1}] {availableDoctors[i].PersonalInfo.Name}");
             Console.WriteLine();
         }
         Console.WriteLine(border);
@@ -215,7 +216,7 @@ public class AppointmentController : IAppointmentController
     private List<Doctor> FindAvailableDoctors(MedicalServiceArea area, DateTime appointmentDateTime)
     {
         var doctorsInArea = _userRepository.GetDoctorsByMedicalServiceArea(area);
-        
+
         var availableDoctors = new List<Doctor>();
 
         foreach (var doctor in doctorsInArea)

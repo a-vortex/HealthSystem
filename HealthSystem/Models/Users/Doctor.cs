@@ -9,9 +9,9 @@ public class Doctor : User
     public MedicalServiceArea MedicalServiceArea { get; set; }
 
     public Doctor() : base() { }
-    public Doctor(string login, string password, string name, string address, string email, string telephone, string cpf, 
-    string crmorcoren, MedicalServiceArea medicalServiceArea) : 
-    base(login, password,  name, address, email, telephone, cpf)
+    public Doctor(string login, string password, string name, string address, string email, string telephone, string cpf,
+    string crmorcoren, MedicalServiceArea medicalServiceArea) :
+    base(login, password, name, address, email, telephone, cpf)
     {
         CRMorCOREN = crmorcoren;
         MedicalServiceArea = medicalServiceArea;

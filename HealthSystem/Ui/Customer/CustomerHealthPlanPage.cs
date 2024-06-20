@@ -3,7 +3,7 @@ public class CustomerHealthPlanPage : IMenu
     private readonly IMenuFactory _menuFactory;
     private readonly IUserSessionService _userSessionService;
     private readonly IUserController _userController;
-    public CustomerHealthPlanPage(IMenuFactory menuFactory,IUserSessionService userSessionService, IUserController userController, string message = "Option")
+    public CustomerHealthPlanPage(IMenuFactory menuFactory, IUserSessionService userSessionService, IUserController userController, string message = "Option")
     {
         _menuFactory = menuFactory;
         _userSessionService = userSessionService;

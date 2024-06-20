@@ -14,7 +14,7 @@ public class UserService : IUserService
     }
 
     [return: NotNull]
-    #pragma warning disable CS8604 
+#pragma warning disable CS8604
     public bool Login(UserDto userDto)
     {
         var user = _userRepository.GetByLogin(userDto.Login);
@@ -25,12 +25,13 @@ public class UserService : IUserService
         }
         return false;
     }
-    #pragma warning restore CS8604
+#pragma warning restore CS8604
     public RegisterUserDto GetByLogin(string login)
     {
-        #pragma warning disable
+#pragma warning disable
         var type = GetUserType(login);
-        if (type == "Doctor"){
+        if (type == "Doctor")
+        {
             var doctor = (Doctor)_userRepository.GetByLogin(login);
             return new RegisterUserDto
             {
@@ -62,13 +63,13 @@ public class UserService : IUserService
                 HealthPlan = healthPlan
             };
         }
-        #pragma warning restore
+#pragma warning restore
     }
 
     //=======================================================================================================
-    public void RegisterUser(RegisterUserDto  userDto, string type)
+    public void RegisterUser(RegisterUserDto userDto, string type)
     {
-        #pragma warning disable
+#pragma warning disable
         if (_userRepository.GetByLogin(userDto.Login) != null)
         {
             throw new ArgumentException("An User with this UserName already exists");
@@ -79,11 +80,11 @@ public class UserService : IUserService
         }
         if (type == "Doctor")
         {
-            if(_userRepository.GetByCOREN(userDto.CRMorCOREN) != null)
+            if (_userRepository.GetByCOREN(userDto.CRMorCOREN) != null)
             {
                 throw new ArgumentException("User with the same CRM or COREN already exists");
             }
-            
+
             var doctor = new Doctor
             {
                 Login = userDto.Login,
@@ -123,12 +124,12 @@ public class UserService : IUserService
         {
             throw new ArgumentException("Invalid user type");
         }
-        #pragma warning restore
+#pragma warning restore
     }
     //=======================================================================================================
     public bool EditUser(RegisterUserDto editUserDto, UserDto userDto, out string error)
     {
-        #pragma warning disable
+#pragma warning disable
         var user = _userRepository.GetByLogin(userDto.Login);
         if (user == null)
         {
@@ -150,7 +151,7 @@ public class UserService : IUserService
         var result = _userRepository.Update(user);
         error = result ? "" : "Error updating user";
         return result;
-        #pragma warning restore
+#pragma warning restore
     }
     //=======================================================================================================
     public string GetUserType(string login)

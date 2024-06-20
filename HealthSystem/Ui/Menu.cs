@@ -8,14 +8,15 @@ public abstract class IMenu
     {
     }
     public abstract IMenu? MenuNext(int option);
-    public void Render(string text){
+    public void Render(string text)
+    {
         this.BaseRender();
-        Console.Write("> "+text+": ");
+        Console.Write("> " + text + ": ");
     }
     public void Render()
     {
         this.BaseRender();
-        Console.Write("> "+inputstr+": ");
+        Console.Write("> " + inputstr + ": ");
         this.Tentativa();
     }
 

@@ -3,7 +3,7 @@ public class UserProfile : IMenu
     private readonly IMenuFactory _menuFactory;
     private readonly IUserController _userController;
     private readonly IUserSessionService _userSessionService;
-    public UserProfile(IMenuFactory menuFactory,IUserController userController,IUserSessionService userSessionService, string message = "Option")
+    public UserProfile(IMenuFactory menuFactory, IUserController userController, IUserSessionService userSessionService, string message = "Option")
     {
         _title = "Your profile";
         _options.Add("[1] View Profile");
@@ -25,12 +25,14 @@ public class UserProfile : IMenu
                 return _menuFactory.CreateMenu("UserProfile", "Option");
             case 2:
                 string error;
-                if (EditProfile(out error)){
+                if (EditProfile(out error))
+                {
                     return _menuFactory.CreateMenu("UserProfile", "Profile edited successfully");
                 }
                 return _menuFactory.CreateMenu("UserProfile", error);
             case 3:
-                if (type == "Doctor"){
+                if (type == "Doctor")
+                {
                     return _menuFactory.CreateMenu("DoctorInicialPage", "Option");
                 }
                 return _menuFactory.CreateMenu("CustomerInicialPage", "Option");
@@ -69,7 +71,8 @@ public class UserProfile : IMenu
         Console.WriteLine("Press any key to return to the previous menu");
         Console.ReadKey();
     }
-    private bool EditProfile(out string error){
+    private bool EditProfile(out string error)
+    {
         error = "Operation canceled by the user";
         string[] options = new string[] {
             "Name",
@@ -91,8 +94,8 @@ public class UserProfile : IMenu
         for (int i = 0; i < options.Length; i++)
         {
             Console.WriteLine($"[{i + 1}] {options[i]}");
-            
-        Console.WriteLine();
+
+            Console.WriteLine();
         }
         Console.WriteLine("[0] Cancel");
         Console.WriteLine();
@@ -107,12 +110,12 @@ public class UserProfile : IMenu
             Console.WriteLine(border);
             Console.WriteLine();
             Console.WriteLine("=> Choose the field you want to edit:");
-            
+
             Console.WriteLine();
             for (int i = 0; i < options.Length; i++)
             {
                 Console.WriteLine($"[{i + 1}] {options[i]}");
-            Console.WriteLine();
+                Console.WriteLine();
             }
             Console.WriteLine("[0] Cancel");
             Console.WriteLine();
@@ -123,7 +126,7 @@ public class UserProfile : IMenu
         return option switch
         {
             1 => _userController.EditUser("Name", out error),
-            2 => _userController.EditUser("Email",out error),
+            2 => _userController.EditUser("Email", out error),
             3 => _userController.EditUser("Address", out error),
             4 => _userController.EditUser("Telephone", out error),
             5 => _userController.EditUser("UserName", out error),

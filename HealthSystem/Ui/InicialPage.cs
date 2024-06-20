@@ -22,7 +22,7 @@ public class InicialPage : IMenu
             1 => _menuFactory.CreateMenu("Login"),
             2 => DisplayAbout(),
             3 => null,
-            _ => _menuFactory.CreateMenu("InicialPage","Please type a valid option"),
+            _ => _menuFactory.CreateMenu("InicialPage", "Please type a valid option"),
         };
     }
     private IMenu? DisplayAbout()

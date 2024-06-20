@@ -5,7 +5,7 @@ public abstract class User
 {
     // NÃO TOQUE NESSE ID DE JEITO NENHUM
     [Key]
-    public int id { get; protected set; } 
+    public int id { get; protected set; }
     // POR FAVOR NAO MUDE ISSO SUA TONTA!
     [Required]
     public string? Login { get; set; }

@@ -4,7 +4,7 @@ public class MenuFactory : IMenuFactory
     private readonly IUserSessionService _userSessionService;
     private readonly IAppointmentController _appointmentController;
 
-    public MenuFactory(IUserController userController, IUserSessionService userSessionService,  IAppointmentController appointmentController)
+    public MenuFactory(IUserController userController, IUserSessionService userSessionService, IAppointmentController appointmentController)
     {
         _userController = userController;
         _userSessionService = userSessionService;
@@ -18,12 +18,12 @@ public class MenuFactory : IMenuFactory
             "InicialPage" => new InicialPage(this, message),
             "Login" => new Login(_userController, this, message),
             "UserProfile" => new UserProfile(this, _userController, _userSessionService, message),
-            
+
             "CustomerInicialPage" => new CustomerInicialPage(this, _userSessionService, message),
             "CustomerMedicalServices" => new CustomerMedicalServices(this, _appointmentController, message),
             "CustomerHealthPlanPage" => new CustomerHealthPlanPage(this, _userSessionService, _userController, message),
 
-            "DoctorInicialPage" => new DoctorInicialPage(this, _userSessionService,_appointmentController, message),
+            "DoctorInicialPage" => new DoctorInicialPage(this, _userSessionService, _appointmentController, message),
 
 
             _ => throw new ArgumentException("Invalid menu type", nameof(menuType)),

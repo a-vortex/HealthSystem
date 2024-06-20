@@ -21,7 +21,7 @@ public class CustomerMedicalServices : IMenu
                 var sucess = _appointmentController.ScheduleMedicalAppointment(out string error);
                 if (!sucess)
                 {
-                   return _menuFactory.CreateMenu("CustomerMedicalServices", error);
+                    return _menuFactory.CreateMenu("CustomerMedicalServices", error);
                 }
                 return _menuFactory.CreateMenu("CustomerMedicalServices", "Appointment scheduled successfully!");
             case 2:

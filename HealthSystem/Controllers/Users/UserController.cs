@@ -222,9 +222,9 @@ public class UserController : IUserController
         if (userDTO.CRMorCOREN != null)
         {
             Console.WriteLine($"CRM or COREN: {userDTO.CRMorCOREN}");
-        Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine($"Medical Service Area: {userDTO.MedicalServiceArea}");
-        Console.WriteLine();
+            Console.WriteLine();
         }
         Console.WriteLine(border);
     }
@@ -263,38 +263,38 @@ public class UserController : IUserController
     }
 
     private MedicalServiceArea GetValidMedicalServiceArea()
-{
-    DisplayMedicalServiceAreas();
-    Console.Write("> Medical Service Area: ");
-    if (!int.TryParse(Console.ReadLine(), out int option) || option < 1 || option > Enum.GetValues(typeof(MedicalServiceArea)).Length)
     {
-        while (!int.TryParse(Console.ReadLine(), out option) || option < 1 || option > Enum.GetValues(typeof(MedicalServiceArea)).Length)
+        DisplayMedicalServiceAreas();
+        Console.Write("> Medical Service Area: ");
+        if (!int.TryParse(Console.ReadLine(), out int option) || option < 1 || option > Enum.GetValues(typeof(MedicalServiceArea)).Length)
         {
-            DisplayMedicalServiceAreas();
-            Console.Write("> Type a valid Medical Service Area: ");
+            while (!int.TryParse(Console.ReadLine(), out option) || option < 1 || option > Enum.GetValues(typeof(MedicalServiceArea)).Length)
+            {
+                DisplayMedicalServiceAreas();
+                Console.Write("> Type a valid Medical Service Area: ");
+            }
         }
+        return (MedicalServiceArea)Enum.GetValues(typeof(MedicalServiceArea)).GetValue(option - 1);
     }
-    return (MedicalServiceArea)Enum.GetValues(typeof(MedicalServiceArea)).GetValue(option - 1);
-}
 
-private void DisplayMedicalServiceAreas()
-{
-    Console.Clear();
-    var border = new string('=', Console.WindowWidth - 1);
-    Console.WriteLine(border);
-    Console.WriteLine($"|| Sign Up Page");
-    Console.WriteLine(border);
-    Console.WriteLine();
-    Console.WriteLine($"=> Select Medical Service Area:");
-    Console.WriteLine();
-    var values = Enum.GetValues(typeof(MedicalServiceArea));
-    foreach (var value in values)
+    private void DisplayMedicalServiceAreas()
     {
-        Console.WriteLine($"[{(int)value + 1}] {value}");
+        Console.Clear();
+        var border = new string('=', Console.WindowWidth - 1);
+        Console.WriteLine(border);
+        Console.WriteLine($"|| Sign Up Page");
+        Console.WriteLine(border);
         Console.WriteLine();
+        Console.WriteLine($"=> Select Medical Service Area:");
+        Console.WriteLine();
+        var values = Enum.GetValues(typeof(MedicalServiceArea));
+        foreach (var value in values)
+        {
+            Console.WriteLine($"[{(int)value + 1}] {value}");
+            Console.WriteLine();
+        }
+        Console.WriteLine(border);
     }
-    Console.WriteLine(border);
-}
 
     private string GetValidCRMOrCOREN()
     {

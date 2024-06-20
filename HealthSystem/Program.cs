@@ -30,7 +30,7 @@ do
     option = Console.ReadLine() ?? "0";
     optionInt = IntValidator.Validate(option);
     amenu = amenu.MenuNext(optionInt ?? 0);
-} while(amenu != null);
+} while (amenu != null);
 
 InicialPage.Exit();
 Console.ReadKey();

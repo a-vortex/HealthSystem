@@ -14,14 +14,15 @@ public class Login : IMenu
     }
     public override IMenu MenuNext(int option)
     {
-        switch(option)
+        switch (option)
         {
             case 1:
                 int? type;
                 var isLogged = _userController.Login(out type);
                 if (isLogged)
                 {
-                    return type switch{
+                    return type switch
+                    {
                         1 => _menuFactory.CreateMenu("DoctorInicialPage", "Welcome to HealthSystem!"),
                         2 => _menuFactory.CreateMenu("CustomerInicialPage", "Welcome to HealthSystem!"),
                         _ => _menuFactory.CreateMenu("Login", "Invalid User Type, please try again")
