@@ -7,8 +7,7 @@ public class CustomerInicialPage : IMenu
         _title = "Customer Page";
         _options.Add("[1] View Profile");
         _options.Add("[2] Medical Services");
-        _options.Add("[3] Invoices");
-        _options.Add("[4] Log Out");
+        _options.Add("[3] Log Out");
         inputstr = message;
         _menuFactory = menuFactory;
         _userSessionService = userSessionService;
@@ -23,8 +22,6 @@ public class CustomerInicialPage : IMenu
             case 2:
                 return _menuFactory.CreateMenu("CustomerMedicalServices", "Option");
             case 3:
-                return _menuFactory.CreateMenu("CustomerInvoices", "Option");
-            case 4:
                 _userSessionService.ClearCurrentUser();
                 return _menuFactory.CreateMenu("Login", "Logged Out");
             default:

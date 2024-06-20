@@ -16,6 +16,77 @@ public class AppointmentController : IAppointmentController
         _userSessionService = userSessionService;
         _appointmentRepository = appointmentRepository;    
     }
+    public void ViewAppointmentsDoctor()
+    {
+        var doctor = _userRepository.GetByLogin(_userSessionService.CurrentUser.Login);
+        var appointments = _appointmentRepository.GetAppointmentsByDoctorId(doctor.id);
+        RenderTitle("Appointments");
+        int windowWidth = Console.WindowWidth;
+        string border = new('=', windowWidth - 1);
+        string borderline = new('_', windowWidth - 1);
+        Console.WriteLine("=> Your Appointments");
+        Console.WriteLine();
+        foreach (var appointment in appointments)
+        {
+            var customer = _userRepository.GetCustomerById(appointment.PatientId);
+            Console.WriteLine(borderline);
+            Console.WriteLine();
+            Console.WriteLine($"Name: {appointment.medicalService.Name}");
+            Console.WriteLine();
+            Console.WriteLine($"Appointment Date: {appointment.AppointmentDate}");
+            Console.WriteLine();
+            Console.WriteLine($"Customer: {customer.PersonalInfo.Name}");
+            Console.WriteLine();
+            Console.WriteLine($"Price: {appointment.medicalService.Price}");
+            Console.WriteLine();
+            Console.WriteLine($"Type: {appointment.medicalService.Type}");
+            Console.WriteLine();
+            Console.WriteLine($"Area: {appointment.medicalService.Area}");
+            Console.WriteLine();
+            Console.WriteLine($"Description: {appointment.medicalService.Description}");
+            Console.WriteLine();
+        }
+        Console.WriteLine(borderline);
+        Console.WriteLine(border);
+        Console.WriteLine("> Press any key to continue...");
+        Console.ReadKey();
+    }
+    public void ViewAppointments()
+    {
+        var user = _userRepository.GetByLogin(_userSessionService.CurrentUser.Login);
+        var appointments = _appointmentRepository.GetAppointmentsByUserId(user.id);
+        RenderTitle("Appointments");
+        int windowWidth = Console.WindowWidth;
+        string border = new('=', windowWidth - 1);
+        string borderline = new('_', windowWidth - 1);
+        Console.WriteLine("=> Your Appointments");
+        Console.WriteLine();
+
+        foreach (var appointment in appointments)
+        {
+            var doctor = _userRepository.GetDoctorById(appointment.DoctorId);
+            Console.WriteLine(borderline);
+            Console.WriteLine();
+            Console.WriteLine($"Name: {appointment.medicalService.Name}");
+            Console.WriteLine();
+            Console.WriteLine($"Appointment Date: {appointment.AppointmentDate}");
+            Console.WriteLine();
+            Console.WriteLine($"Doctor: {doctor.PersonalInfo.Name}");
+            Console.WriteLine();
+            Console.WriteLine($"Price: {appointment.medicalService.Price}");
+            Console.WriteLine();
+            Console.WriteLine($"Type: {appointment.medicalService.Type}");
+            Console.WriteLine();
+            Console.WriteLine($"Area: {appointment.medicalService.Area}");
+            Console.WriteLine();
+            Console.WriteLine($"Description: {appointment.medicalService.Description}");
+            Console.WriteLine();
+        }
+        Console.WriteLine(borderline);
+        Console.WriteLine(border);
+        Console.WriteLine("> Press any key to continue...");
+        Console.ReadKey();
+    }
     public bool ScheduleMedicalAppointment(out string message)
     {
         message = string.Empty;

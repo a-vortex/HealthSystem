@@ -23,7 +23,7 @@ public class MenuFactory : IMenuFactory
             "CustomerMedicalServices" => new CustomerMedicalServices(this, _appointmentController, message),
             "CustomerHealthPlanPage" => new CustomerHealthPlanPage(this, _userSessionService, _userController, message),
 
-            "DoctorInicialPage" => new DoctorInicialPage(this, _userSessionService, message),
+            "DoctorInicialPage" => new DoctorInicialPage(this, _userSessionService,_appointmentController, message),
 
 
             _ => throw new ArgumentException("Invalid menu type", nameof(menuType)),

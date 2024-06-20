@@ -21,4 +21,16 @@ public class AppointmentRepository : IAppointmentRepository
             .Where(a => a.DoctorId == doctorid && a.AppointmentDate == appointmentDateTime)
             .ToList();
     }
+    public List<MedicalAppointment> GetAppointmentsByUserId(int userid)
+    {
+        return _context.MedicalAppointments
+            .Where(a => a.PatientId == userid)
+            .ToList();
+    }
+    public List<MedicalAppointment> GetAppointmentsByDoctorId(int doctorid)
+    {
+        return _context.MedicalAppointments
+            .Where(a => a.DoctorId == doctorid)
+            .ToList();
+    }
 }
