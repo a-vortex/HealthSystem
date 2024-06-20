@@ -9,7 +9,6 @@ public class HealthSystemDbContext : DbContext
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<HealthPlan> HealthPlans { get; set; }
-    public DbSet<MedicalService> MedicalServices { get; set; }
     public DbSet<MedicalAppointment> MedicalAppointments { get; set; }
 
 
@@ -36,8 +35,17 @@ public class HealthSystemDbContext : DbContext
             });
 
         modelBuilder.Entity<HealthPlan>().HasKey(hp => hp.PlanId);
+
         modelBuilder.Entity<MedicalAppointment>().HasKey(ma => ma.AppointmentId);
-        modelBuilder.Entity<MedicalService>().HasKey(ms => ms.MedicalServiceId);
+        modelBuilder.Entity<MedicalAppointment>()
+                .OwnsOne(ma => ma.medicalService, ms =>
+                {
+                    ms.Property(m => m.Name).IsRequired();
+                    ms.Property(m => m.Price).IsRequired();
+                    ms.Property(m => m.Description).IsRequired();
+                    ms.Property(m => m.Type).IsRequired();
+                    ms.Property(m => m.Area).IsRequired();
+                });
 
         modelBuilder.Entity<Customer>()
             .HasOne(c => c.HealthPlan)
@@ -55,11 +63,5 @@ public class HealthSystemDbContext : DbContext
             .WithMany()
             .HasForeignKey(ma => ma.PatientId)
             .HasPrincipalKey(c => c.id);
-
-        modelBuilder.Entity<MedicalAppointment>()
-            .HasOne(ma => ma.MedicalService)
-            .WithMany()
-            .HasForeignKey(ma => ma.MedicalServiceId)
-            .HasPrincipalKey(c => c.MedicalServiceId);
     }
 }

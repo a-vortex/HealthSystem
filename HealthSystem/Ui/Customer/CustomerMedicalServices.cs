@@ -1,7 +1,9 @@
 public class CustomerMedicalServices : IMenu
 {
     private readonly IMenuFactory _menuFactory;
-    public CustomerMedicalServices(IMenuFactory menuFactory, string message = "Option")
+    private readonly IAppointmentController _appointmentController;
+    private readonly IUserController _userController;
+    public CustomerMedicalServices(IMenuFactory menuFactory, IAppointmentController appointmentController, string message = "Option")
     {
         _title = "Medical Services";
         _options.Add("[1] Schedule an appointment");
@@ -11,6 +13,7 @@ public class CustomerMedicalServices : IMenu
         _options.Add("[5] Back to main Page");
         inputstr = message;
         _menuFactory = menuFactory;
+        _appointmentController = appointmentController;
     }
 
     public override IMenu? MenuNext(int option)
@@ -18,7 +21,12 @@ public class CustomerMedicalServices : IMenu
         switch (option)
         {
             case 1:
-                return this;
+                var sucess = _appointmentController.ScheduleMedicalAppointment(out string error);
+                if (!sucess)
+                {
+                   return _menuFactory.CreateMenu("CustomerMedicalServices", error);
+                }
+                return _menuFactory.CreateMenu("CustomerMedicalServices", "Appointment scheduled successfully!");
             case 2:
                 return this;
             case 3:
@@ -31,4 +39,5 @@ public class CustomerMedicalServices : IMenu
                 return _menuFactory.CreateMenu("CustomerMedicalServices", "Invalid Option, please type an option");
         }
     }
+
 }

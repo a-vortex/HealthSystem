@@ -38,4 +38,16 @@ public class UserRepository : IUserRepository
         _context.SaveChanges();
         return true;
     }
+    public Customer GetCustomerById(int customerId)
+    {
+        return _context.Customers.SingleOrDefault(c => c.id == customerId);
+    }
+    public Doctor GetDoctorById(int doctorId)
+    {
+        return _context.Doctors.SingleOrDefault(d => d.id == doctorId);
+    }
+    public List<Doctor> GetDoctorsByMedicalServiceArea(MedicalServiceArea area)
+    {
+        return _context.Doctors.Where(d => d.MedicalServiceArea == area).ToList();
+    }
 }

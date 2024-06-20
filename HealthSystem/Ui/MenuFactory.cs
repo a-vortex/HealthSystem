@@ -2,11 +2,13 @@ public class MenuFactory : IMenuFactory
 {
     private readonly IUserController _userController;
     private readonly IUserSessionService _userSessionService;
+    private readonly IAppointmentController _appointmentController;
 
-    public MenuFactory(IUserController userController, IUserSessionService userSessionService)
+    public MenuFactory(IUserController userController, IUserSessionService userSessionService,  IAppointmentController appointmentController)
     {
         _userController = userController;
         _userSessionService = userSessionService;
+        _appointmentController = appointmentController;
     }
 
     public IMenu CreateMenu(string menuType, string message = "Input")
@@ -18,7 +20,7 @@ public class MenuFactory : IMenuFactory
             "UserProfile" => new UserProfile(this, _userController, _userSessionService, message),
             
             "CustomerInicialPage" => new CustomerInicialPage(this, _userSessionService, message),
-            "CustomerMedicalServices" => new CustomerMedicalServices(this, message),
+            "CustomerMedicalServices" => new CustomerMedicalServices(this, _appointmentController, message),
             "CustomerHealthPlanPage" => new CustomerHealthPlanPage(this, _userSessionService, _userController, message),
 
             "DoctorInicialPage" => new DoctorInicialPage(this, _userSessionService, message),
